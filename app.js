@@ -1,4 +1,4 @@
-
+console.log('Hi')
 
 const game = {
   title: 'Guess the Number!',
@@ -13,21 +13,13 @@ const game = {
 
   ////////////////
   play: function() {
-    console.log(this.prevGuesses)
+    //console.log(this.prevGuesses)
+    this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
+    console.log(this.secretNum)
     do{
-      this.secretNum = Math.floor(Math.random() * 
-      (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
-   this.getGuess()
-      console.log(this.prevGuesses)
-      //getGuess.push()
-      if (this.prevGuesses[this.prevGuesses.length - 1] === this.secretNum){
-        console.log('ya got it')
-      } else {
-        console.log('no stupid, guess again lol') 
-      } 
-    } while (this.prevGuesses != this.secretNum)
-    
-       
+      this.getGuess()
+      this.render()
+    } while (this.prevGuesses != this.secretNum)  
   },
   ///////////////////
   getGuess: function(){
@@ -35,18 +27,18 @@ const game = {
     do{
       guess = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`))
       this.prevGuesses.push(guess)
-    } while (isNaN(guess))
+    } while (isNaN(guess) || guess < this.smallestNum || guess > this.biggestNum)
     return guess
-    //console.log(this.prevGuesses)
+
   },
 ///////////////////////
   render: function(){
-    if(this.secretNum === this.prevGuesses.length - 1)
-    {alert(`Congrats, You eventually guessed correctly in ${prevGuesses.length}...What, ya want an award or something? Go play outside.`)
-  } else if (this.prevGuesses >= this.secretNum){
-    console.log(`Nope, too high.`)
+    if(this.secretNum === this.prevGuesses[this.prevGuesses.length - 1])
+    {alert(`Look who finally got it in ${this.prevGuesses.length} guesses...What, ya want an award or something? Go play outside.`)
+  } else if (this.prevGuesses[this.prevGuesses.length - 1] >= this.secretNum){
+    alert(`Nope, too high.`)
     } else {
-    console.log(`Nope, too low.`)
+    alert(`Nope, too low.`)
     }
   }
 }   
@@ -54,4 +46,3 @@ const game = {
 game.play()
 console.log(game.secretNum)
 
-//You need a function which you invoke/call (method)
